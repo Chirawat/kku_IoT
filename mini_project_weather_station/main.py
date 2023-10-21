@@ -12,7 +12,7 @@ PWD         = "i343xvHx0LuqhiB+ZhvFdSPE"
 CH_ID       = "2313579"
 
 #define LCD
-i2c = I2C(scl=Pin(22), sda=Pin(21), freq=100000)
+i2c = I2C(scl=Pin(4), sda=Pin(5), freq=100000)
 display = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 # 1 Connect WIFI
@@ -23,7 +23,7 @@ if not wlan.isconnected():
     display.fill(0)
     display.text("Connecting...", 0, 0, 1)
     display.show()
-    wlan.connect("Nott-iPhone11", "hotspotpassword")
+    wlan.connect("@LINPHA-WIFI_2.4GHz", "")
     while not wlan.isconnected():
         pass
 print("IP Address: ", wlan.ifconfig()[0])
@@ -35,7 +35,7 @@ client.connect()
 topic = "channels/" + CH_ID + "/publish"
 
 # Sensor connection
-d = dht.DHT22( Pin(4) )
+d = dht.DHT22( Pin(15) )
 
 # build-in led
 led = Pin(2, Pin.OUT)
@@ -65,5 +65,3 @@ while True:
     # Toggle signal on LED
     led.on()
     time.sleep(1)
-
-    
